@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Student
+from .models import Student, Path
 
 # serializer yazarken kullanabileceğimiz 1. yöntem ama kullanışlı değil
 """
@@ -28,10 +28,12 @@ class StudentSerializer(serializers.Serializer):
 class StudentSerializer(serializers.ModelSerializer):
 
     born_year = serializers.SerializerMethodField()
+    path = serializers.StringRelatedField()  # to get data as a string version, read_only
+    path_id = serializers.IntegerField()  # for create operation
 
     class Meta:
         model = Student
-        fields = ["id", "first_name", "last_name", "number", "age", "born_year"]
+        fields = ["id", "first_name", "last_name", "number", "age", "born_year", "path", "path_id"]
         # exclude = ["age"]  cannot set both fields and exclude
 
     def get_born_year(self, obj):
@@ -41,3 +43,10 @@ class StudentSerializer(serializers.ModelSerializer):
         return current_time.year - obj.age
 
 
+class PathSerializer(serializers.ModelSerializer):
+
+    students = StudentSerializer(many = True)  # many = True birden fazla student geleceği için
+
+    class Meta:
+        model = Path
+        fields = ["id", "path_name", "students"]
