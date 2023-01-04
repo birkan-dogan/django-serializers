@@ -45,7 +45,11 @@ class StudentSerializer(serializers.ModelSerializer):
 
 class PathSerializer(serializers.ModelSerializer):
 
-    students = StudentSerializer(many = True)  # many = True birden fazla student geleceği için
+    students = serializers.HyperlinkedRelatedField(
+        many = True,
+        read_only = True,
+        view_name = "detail"
+        )  # many = True birden fazla student geleceği için
 
     class Meta:
         model = Path
