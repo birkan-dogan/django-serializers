@@ -1,6 +1,7 @@
 from rest_framework.pagination import (
     PageNumberPagination,
-    LimitOffsetPagination
+    LimitOffsetPagination,
+    CursorPagination
 )
 
 class CustomPageNumberPagination(PageNumberPagination):
@@ -10,3 +11,9 @@ class CustomPageNumberPagination(PageNumberPagination):
 
 class CustomLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 10
+
+
+class CustomCursorPagination(CursorPagination):
+    cursor_query_param = "imlec"
+    page_size = 10
+    ordering = "id"  # changing ordering style (we don't need created column anymore)

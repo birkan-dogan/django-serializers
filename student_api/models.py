@@ -14,6 +14,7 @@ class Student(models.Model):
     number = models.IntegerField()
     age = models.IntegerField(default = 25)
     path = models.ForeignKey(Path, related_name = "students", on_delete = models.CASCADE)
+    created = models.DateTimeField(auto_now_add = True)  # this column is working for CursorPagination feature
 
     def __str__(self):
         return f"{self.number}-{self.last_name} {self.first_name}"

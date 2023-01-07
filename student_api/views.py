@@ -231,14 +231,15 @@ class StudentDetailCV(generics.RetrieveUpdateDestroyAPIView):
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 
-from .pagination import CustomPageNumberPagination, CustomLimitOffsetPagination
+from .pagination import CustomPageNumberPagination, CustomLimitOffsetPagination, CustomCursorPagination
 
 class StudentModelViewSet(ModelViewSet):
 
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
     # pagination_class = CustomPageNumberPagination
-    pagination_class = CustomLimitOffsetPagination
+    # pagination_class = CustomLimitOffsetPagination
+    pagination_class = CustomCursorPagination
 
     @action(detail = False, methods = ["GET"])
     def student_count(self, request):
