@@ -233,6 +233,8 @@ from rest_framework.decorators import action
 
 from .pagination import CustomPageNumberPagination, CustomLimitOffsetPagination, CustomCursorPagination
 
+from django_filters.rest_framework import DjangoFilterBackend  # for custom process on filtering
+
 class StudentModelViewSet(ModelViewSet):
 
     serializer_class = StudentSerializer
@@ -240,6 +242,7 @@ class StudentModelViewSet(ModelViewSet):
     pagination_class = CustomPageNumberPagination
     # pagination_class = CustomLimitOffsetPagination
     # pagination_class = CustomCursorPagination
+    filter_backends = [DjangoFilterBackend]
     filterset_fields = ["first_name", "last_name"]
 
     @action(detail = False, methods = ["GET"])
