@@ -16,4 +16,4 @@ class Student(models.Model):
     path = models.ForeignKey(Path, related_name = "students", on_delete = models.CASCADE)
 
     def __str__(self):
-        return self.first_name
+        return f"{self.number}-{self.last_name} {self.first_name}"
