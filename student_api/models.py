@@ -12,7 +12,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length = 25)
     last_name = models.CharField(max_length = 50)
     number = models.IntegerField()
-    age = models.IntegerField(blank = True, null = True)
+    age = models.IntegerField(default = 25)
     path = models.ForeignKey(Path, related_name = "students", on_delete = models.CASCADE)
 
     def __str__(self):

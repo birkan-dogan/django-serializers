@@ -40,16 +40,18 @@ class StudentSerializer(serializers.ModelSerializer):
         import datetime
         current_time = datetime.datetime.now()
 
-        return current_time.year - obj.age
+        return current_time.year - int(obj.age)
 
 
 class PathSerializer(serializers.ModelSerializer):
 
-    students = serializers.HyperlinkedRelatedField(
-        many = True,
-        read_only = True,
-        view_name = "detail"
-        )  # many = True birden fazla student geleceği için
+    # students = serializers.HyperlinkedRelatedField(
+    #     many = True,
+    #     read_only = True,
+    #     view_name = "detail"
+    #     )  # many = True birden fazla student geleceği için
+
+    students = StudentSerializer(many = True)
 
     class Meta:
         model = Path
