@@ -235,6 +235,8 @@ from .pagination import CustomPageNumberPagination, CustomLimitOffsetPagination,
 
 from django_filters.rest_framework import DjangoFilterBackend  # for custom process on filtering
 
+from rest_framework.filters import SearchFilter
+
 class StudentModelViewSet(ModelViewSet):
 
     serializer_class = StudentSerializer
@@ -242,8 +244,9 @@ class StudentModelViewSet(ModelViewSet):
     pagination_class = CustomPageNumberPagination
     # pagination_class = CustomLimitOffsetPagination
     # pagination_class = CustomCursorPagination
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ["first_name", "last_name"]
+    search_fields = ["first_name"]
 
     @action(detail = False, methods = ["GET"])
     def student_count(self, request):
