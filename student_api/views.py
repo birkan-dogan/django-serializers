@@ -237,9 +237,10 @@ class StudentModelViewSet(ModelViewSet):
 
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
-    # pagination_class = CustomPageNumberPagination
+    pagination_class = CustomPageNumberPagination
     # pagination_class = CustomLimitOffsetPagination
-    pagination_class = CustomCursorPagination
+    # pagination_class = CustomCursorPagination
+    filterset_fields = ["first_name", "last_name"]
 
     @action(detail = False, methods = ["GET"])
     def student_count(self, request):
