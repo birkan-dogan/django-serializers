@@ -237,6 +237,9 @@ from django_filters.rest_framework import DjangoFilterBackend  # for custom proc
 
 from rest_framework.filters import SearchFilter
 
+# import for declaring permission in our endpoint
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
 class StudentModelViewSet(ModelViewSet):
 
     serializer_class = StudentSerializer
@@ -247,6 +250,9 @@ class StudentModelViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ["first_name", "last_name"]
     search_fields = ["first_name"]
+
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
 
     @action(detail = False, methods = ["GET"])
     def student_count(self, request):
