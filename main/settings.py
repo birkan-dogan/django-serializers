@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "rest_framework.authtoken",  # this app will create a database table to hold user-token relation
+    "user",
 ]
 
 MIDDLEWARE = [
