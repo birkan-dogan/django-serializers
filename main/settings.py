@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "student_api",
     "rest_framework",
     "django_filters",
+    "rest_framework.authtoken",  # this app will create a database table to hold user-token relation
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,7 @@ REST_FRAMEWORK = {
     # 'PAGE_SIZE': 25,
     # "DEFAULT_FILTER_BACKENDS" : ["django_filters.rest_framework.DjangoFilterBackend"]  # global filtering
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
